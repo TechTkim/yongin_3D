@@ -7,7 +7,7 @@
 <meta name="description" content="용인중학교 경기형 공간재구조화 사전기획 보고서 87–94쪽 평면·단면·조감도를 근거로 만든 3D 스터디 모형">
 <meta name="robots" content="noindex, nofollow">
 <meta property="og:title" content="용인중학교 공간재구조화 3D 모형">
-<meta property="og:description" content="사전기획(안) 층별 평면과 광장형 증축·데크를 3D로 살펴보는 모형">
+<meta property="og:description" content="사전기획(안) 층별 평면과 광장형 증축·데크, 정문·후문 등굣길을 3D로 살펴보는 모형">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#E4E8EC">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%AB%3C/text%3E%3C/svg%3E">
@@ -131,6 +131,16 @@ body.big .zoompad{right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px))
 .lbl.det.conn{border-color:#2F6FD0}
 .lbl.det.conn::before{background:#2F6FD0;border-radius:1px;transform:rotate(45deg)}
 .lbl.det.deckc::before{background:#B0845A}
+.lbl.det.rt-main{border-color:#2F6FD0}
+.lbl.det.rt-main::before{background:#2F6FD0}
+.lbl.det.rt-back{border-color:#E07A1F}
+.lbl.det.rt-back::before{background:#E07A1F}
+.lbl.det.rt-hub{background:#213A63;color:#fff;border-color:#213A63}
+.lbl.det.rt-hub::before{background:#fff}
+.rlegend{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;font-size:12px;color:var(--ink)}
+.rlegend i{display:inline-block;width:18px;height:4px;border-radius:2px;margin-right:6px;vertical-align:3px}
+.rlegend i.dash{background:repeating-linear-gradient(90deg,#E07A1F 0 5px,transparent 5px 8px)}
+.focusbar button[data-f="route"][aria-pressed="true"]{border-color:#2F6FD0;box-shadow:inset 3px 0 0 #2F6FD0}
 .lbl.sel{outline:2px solid #2F6FD0}
 .lbl.fit-hide{display:none !important}
 
@@ -254,11 +264,12 @@ button,.chip,.lv,label{touch-action:manipulation;-webkit-tap-highlight-color:tra
     <button data-view="field" aria-pressed="false">운동장에서</button>
   </div>
   <button class="optbtn" id="optBtn" aria-expanded="false">보기 설정</button>
-  <div class="focusbar" role="group" aria-label="크게 바뀌는 세 곳">
-    <h3>크게 바뀌는 세 곳</h3>
+  <div class="focusbar" role="group" aria-label="자세히 보기">
+    <h3>자세히 보기</h3>
     <button data-f="north" aria-pressed="false">광장형 증축 (북측)<small>러닝센터 · 능동학습실 · 옥상데크</small></button>
     <button data-f="south" aria-pressed="false">광장형 증축 (남측)<small>커뮤니티 스텝 · 복층 로비</small></button>
     <button data-f="deck" aria-pressed="false">운동장 쪽 데크<small>데크 · 그늘회랑 · 연결 계단</small></button>
+    <button data-f="route" aria-pressed="false">등굣길 (정문·후문)<small>들어오는 길 · 따라 걷기</small></button>
   </div>
   <div class="toggles">
     <label><input type="checkbox" id="tLabels" checked> 이름 표시</label>
@@ -520,7 +531,7 @@ label('소규모 체육공간','out',new THREE.Vector3(X(1750),1,Z(1445)),0,worl
 rectBox(845,780,895,1480,0,0.05,L.grass,land).castShadow=false;
 rectBox(830,1405,1360,1485,0,0.05,L.grass,land).castShadow=false;
 label('보행 주진입 (정문)','pin',new THREE.Vector3(X(1390),2.2,Z(1470)),0,world);
-label('보행 부진입 (후문)','pin',new THREE.Vector3(X(790),Y(92.5),Z(745)),0,world);
+label('보행 부진입 (후문)','pin',new THREE.Vector3(X(806),Y(92.6),Z(748)),0,world);
 label('차량 주출입구','pin',new THREE.Vector3(X(2150),Y(92.5),Z(560)),0,world);
 
 function tree(px,pz,y,s){
@@ -651,10 +662,10 @@ building({name:'커뮤니티 스텝',fac:M.facAdd,floors:[
 ]});
 
 /* ---------- 교사1호동 + 데크 (p.90·91) ---------- */
-const b1=[[1035,680],[1283,680],[1405,680],[1940,680],[1940,770],[1325,770],[1118,770],[1035,770]];
+const b1=[[1035,680],[1088,680],[1112,680],[1283,680],[1405,680],[1940,680],[1940,770],[1325,770],[1118,770],[1035,770]];
 const row=list=>list.map(r=>[r[0],r[1],r[2],700,r[3],770,r[4]]);
 building({name:'교사1호동',fac:M.facOld,tag:new THREE.Vector3(X(1640),Y(101.6),Z(725)),floors:[
-  {name:'1층',el:90.3,h:3.3,env:[b1],edges:['fofffooo'],rooms:[['복도','lounge',1035,680,1940,700]].concat(row([
+  {name:'1층',el:90.3,h:3.3,env:[b1],edges:['fofofffooo'],rooms:[['복도','lounge',1035,680,1940,700]].concat(row([
     ['홀','lounge',1035,1120],['계단','core',1120,1160],['보건실','care',1160,1245],
     ['로비 (커뮤니티 스텝 연결)','lounge',1245,1325,{label:true}],['그룹실','learning',1325,1365],['행정실','admin',1365,1450],
     ['계단','core',1450,1490],['교장실','admin',1490,1530],['회의실','admin',1530,1570],['교무실','admin',1570,1690],
@@ -681,12 +692,12 @@ building({name:'교사1호동',fac:M.facOld,tag:new THREE.Vector3(X(1640),Y(101.
     dl('그늘회랑 — 햇빛을 피하며 이동·점유하는 데크 하부 공간',1560,1.3,792,1,f,'deckc');
     dl('계단 하부 도착 (EL +87.0)',1848,0.8,800,1,f,'conn');
   }]},
-  {name:'2층',el:93.6,h:3.3,env:[b1],edges:['foffffoo'],rooms:[['복도','lounge',1035,680,1940,700]].concat(row([
+  {name:'2층',el:93.6,h:3.3,env:[b1],edges:['fffoffffoo'],rooms:[['복도','lounge',1035,680,1940,700]].concat(row([
     ['홀','lounge',1035,1120],['계단','core',1120,1160],['B-10',C,1160,1240],['B-11',C,1240,1325],['B-12',C,1325,1405],
     ['그룹실','learning',1405,1450],['계단','core',1450,1490],['위클래스','care',1490,1570],['교사휴게실 1','teacher',1570,1610],
     ['특수교무실','special',1610,1650],['특수교실','special',1650,1735],['특수교실','special',1735,1815],['계단','core',1815,1860],['화장실','service',1860,1940]
   ])),ev:[[1035,705,1075,745]]},
-  {name:'3층',el:96.9,h:3.3,env:[b1],edges:['ffffffoo'],rooms:[['복도','lounge',1035,680,1940,700]].concat(row([
+  {name:'3층',el:96.9,h:3.3,env:[b1],edges:['ffffffffoo'],rooms:[['복도','lounge',1035,680,1940,700]].concat(row([
     ['홀','lounge',1035,1075],['교사휴게실 2','teacher',1075,1120],['계단','core',1120,1160],['C-7',C,1160,1240],['C-8',C,1240,1325],['C-9',C,1325,1405],
     ['그룹실','learning',1405,1450],['계단','core',1450,1490],['교사연구실 C','teacher',1490,1570],['C-10',C,1570,1650],['C-11',C,1650,1735],['C-12',C,1735,1815],
     ['계단','core',1815,1860],['화장실','service',1860,1940]
@@ -778,6 +789,60 @@ const elTags=[
 ];
 elTags.forEach(t=>label('EL '+t[0],'el',new THREE.Vector3(X(t[1]),Y(t[3])+0.5,Z(t[2])),levelOf(t[3]),world,{elTag:true}));
 
+/* ---------- entry routes traced from the pedestrian arrows on p.90 (정문) and p.91 (후문) ---------- */
+const routesG=new THREE.Group(); world.add(routesG); routesG.visible=false;
+const ROUTES={
+  main:{color:'#2F6FD0',dot:'#DCE8FF',
+    pts:[[1390,1488,87],[1390,1388,87],[1083,1386,87],[1083,960,87],[1083,918,87],[1083,813,87],[1195,813,87],[1237,813,88.65],[1245,813,88.65],[1283,813,90.3],[1302,813,90.3],[1302,742,90.3]]},
+  back:{color:'#E07A1F',dot:'#FFE3C7',
+    pts:[[812,745,90.4],[835,712,90.3],[870,662,90.2],[950,652,90.2],[1035,650,90.2],[1095,650,90.2],[1100,676,90.3],[1100,694,90.3]],
+    extra:[[1100,694,90.3],[1100,742,90.3],[1085,774,90.45],[1085,812,90.5]]}
+};
+const routeObj={}, routeMats=[], routeDots=[];
+Object.entries(ROUTES).forEach(([k,d])=>{
+  const g=new THREE.Group(); routesG.add(g);
+  const P=d.pts.map(p=>new THREE.Vector3(X(p[0]),Y(p[2])+0.25,Z(p[1])));
+  const path=new THREE.CurvePath(); for(let i=0;i<P.length-1;i++) path.add(new THREE.LineCurve3(P[i],P[i+1]));
+  const m=new THREE.MeshBasicMaterial({color:d.color,transparent:true,depthTest:false}); routeMats.push(m);
+  const tube=new THREE.Mesh(new THREE.TubeGeometry(path,P.length*48,0.3,8,false),m); tube.renderOrder=10; g.add(tube);
+  let all=d.pts.slice(), endA=P[P.length-2], endB=P[P.length-1];
+  if(d.extra){ // after the entrance: corridor connection (not drawn as an arrow in the plan) — dashed
+    const E=d.extra.map(p=>new THREE.Vector3(X(p[0]),Y(p[2])+0.25,Z(p[1])));
+    const ml=new THREE.MeshBasicMaterial({color:d.color,transparent:true,opacity:0.55,depthTest:false}); ml.userData.base=0.55; routeMats.push(ml);
+    for(let i=0;i<E.length-1;i++){ const a=E[i],b=E[i+1],len=a.distanceTo(b),dir=b.clone().sub(a).normalize();
+      for(let t=0;t<len-0.2;t+=1.0){ const dl=Math.min(0.55,len-t), c=a.clone().add(dir.clone().multiplyScalar(t+dl/2));
+        const o=new THREE.Mesh(new THREE.CylinderGeometry(0.26,0.26,dl,8),ml); o.renderOrder=10; o.position.copy(c); o.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),dir); g.add(o); } }
+    all=all.concat(d.extra.slice(1)); endA=E[E.length-2]; endB=E[E.length-1];
+  }
+  const dir=endB.clone().sub(endA).normalize(), cone=new THREE.Mesh(new THREE.ConeGeometry(0.75,1.6,16),m);
+  cone.renderOrder=10; cone.position.copy(endB.clone().add(dir.clone().multiplyScalar(0.3))); cone.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),dir); g.add(cone);
+  const dots=[], dm=new THREE.MeshBasicMaterial({color:d.dot,depthTest:false});
+  for(let i=0;i<9;i++){ const s=new THREE.Mesh(new THREE.SphereGeometry(0.5,12,10),dm); s.renderOrder=11; g.add(s); dots.push(s); routeDots.push(s); }
+  const eye=new THREE.CatmullRomCurve3(all.map(p=>new THREE.Vector3(X(p[0]),Y(p[2])+1.6,Z(p[1]))),false,'centripetal');
+  routeObj[k]={g,path,dots,eye,len:path.getLength()};
+});
+const RL=(t,px,pz,el,r,cls)=>label(t,'det '+cls,new THREE.Vector3(X(px),Y(el)+1.9,Z(pz)),levelOf(el),world,{focus:'route',route:r});
+RL('정문 (보행 주진입)',1390,1462,87,'main','rt-main');
+RL('그늘마당 — 필로티 하부 (EL +87.0)',1083,1180,87,'main','rt-main');
+RL('개축동 1층 로비 (EL +87.0)',1083,885,87,'main','rt-main');
+RL('커뮤니티 스텝 — EL +87.0 → +90.3',1240,826,88.6,'main','rt-main');
+RL('1호동 1층 로비 (EL +90.3)',1302,736,90.3,'main','rt-main');
+RL('후문 (보행 부진입, EL +90.5)',812,745,90.4,'back','rt-back');
+RL('개축동 북측 통로 (위로 3·4층)',990,652,90.2,'back','rt-back');
+RL('계단마당 옆 (EL +90.1)',1070,628,90.2,'back','rt-back');
+RL('입구 — 1호동 복도 서쪽 끝 (EL +90.3)',1100,684,90.3,'back','rt-back');
+RL('개축동 2층 라운지-1 (EL +90.5)',1085,812,90.5,'back','rt-back');
+RL('두 길이 모이는 2층 레벨 학교 중심 (EL +90.3~90.5)',1200,700,92.2,null,'rt-hub');
+// x-ray: buildings turn see-through while the routes are shown from above
+const bMats=[...Object.values(M),...Object.values(TM)];
+bMats.forEach(m=>{ m.userData.xb={t:m.transparent,o:m.opacity,d:m.depthWrite}; });
+let xray=false;
+function setXray(on){ if(on===xray) return; xray=on;
+  bMats.forEach(m=>{ const b=m.userData.xb; if(on){ m.transparent=true; m.opacity=Math.min(b.o,0.22); m.depthWrite=false; } else { m.transparent=b.t; m.opacity=b.o; m.depthWrite=b.d; } m.needsUpdate=true; }); }
+function routeWalkStyle(on){ // while walking: solid walls, lighter guide line, no moving dots
+  routeMats.forEach(m=>{ m.depthTest=on; m.opacity=on?(m.userData.base?0.3:0.45):(m.userData.base||1); m.needsUpdate=true; });
+  routeDots.forEach(s=>s.visible=!on); }
+
 /* ---------- focus areas ---------- */
 const V=(a,b,c)=>new THREE.Vector3(a,b,c);
 const FOCUS={
@@ -805,11 +870,21 @@ const FOCUS={
            '운동장에서':{p:V(X(1612),1.8,Z(1010)),t:V(X(1612),1.6,Z(790))},
            '데크 위에서':{p:V(X(1338),Y(90.3)+1.6,Z(796)),t:V(X(1880),Y(90.3)+0.9,Z(789))},
            '그늘회랑 아래':{p:V(X(1338),1.5,Z(793)),t:V(X(1880),1.35,Z(792))},
-           '동쪽 계단 쪽':{p:V(X(1905),5.5,Z(880)),t:V(X(1830),1.8,Z(805))}}}
+           '동쪽 계단 쪽':{p:V(X(1905),5.5,Z(880)),t:V(X(1830),1.8,Z(805))}}},
+  route:{title:'등굣길 — 정문과 후문',sub:'두 길 모두 2층 레벨(EL +90.3~90.5)의 학교 중심으로 모입니다',
+    items:['정문(보행 주진입) → 그늘마당(필로티 하부) → 개축동 1층 로비(EL +87.0) → 커뮤니티 스텝 → 1호동 1층 로비(EL +90.3)',
+           '후문(보행 부진입, EL +90.5) → 개축동 북측 통로 → 계단마당 옆 → 1호동 복도 서쪽 끝 입구(EL +90.3) → 개축동 2층 라운지-1(EL +90.5)',
+           '정문 길은 커뮤니티 스텝에서 3.3m를 오르고, 후문 길은 계단 없이 거의 같은 높이로 들어옵니다'],
+    bld:null,c:V(X(1100),0,Z(1000)),r:220,route:true,floorTitle:'길 선택',viewTitle:'보는 방법',
+    floors:[{n:'두 길 모두'},{n:'정문 길',route:'main'},{n:'후문 길',route:'back'}],
+    views:{'조감':{p:V(X(1100)-85,92,Z(1060)+78),t:V(X(1110),2,Z(1010))},
+           '정문 길 따라 걷기':{walk:'main'},
+           '후문 길 따라 걷기':{walk:'back'},
+           '위에서':{p:V(X(1100),215,Z(1065)+3),t:V(X(1100),0,Z(1065))}}}
 };
 
 /* ---------- state & UI ---------- */
-let current=0, focus=null, fFloor=0, explode=false, big=false, cutTarget=999, cutNow=999, selected=null;
+let current=0, focus=null, fFloor=0, explode=false, big=false, cutTarget=999, cutNow=999, selected=null, walk=null;
 const $=id=>document.getElementById(id);
 const tLabels=$('tLabels'), tGhost=$('tGhost'), tLand=$('tLand'), tFlow=$('tFlow');
 
@@ -823,6 +898,7 @@ function setBig(on){
   applyOffset(); dolly(on?0.62:1/0.62); fitDirty=true;
 }
 function setLevel(lv){
+  stopWalk();
   if(big){ big=false; document.body.classList.remove('big'); }
   document.body.classList.remove('focusing');
   focus=null; explode=false; applyExplode(); current=lv; const d=LEVELS[lv];
@@ -831,23 +907,26 @@ function setLevel(lv){
   document.querySelectorAll('.lv').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.lv===lv)));
   document.querySelectorAll('[data-f]').forEach(b=>b.setAttribute('aria-pressed','false'));
   $('focusCtl').innerHTML='';
-  showCard(d.title,d.sub,d.items,lv===0?(isMobile()?'아래 숫자 버튼으로 층을 고르면 그 높이로 건물을 잘라 보여줍니다. 위쪽 세 버튼으로 주요 공간을 자세히 볼 수 있습니다. 한 손가락으로 회전, 두 손가락으로 확대·이동합니다.':'왼쪽에서 층을 고르면 그 높이로 건물을 잘라 실 배치를 보여줍니다. 오른쪽 “크게 바뀌는 세 곳”에서 주요 공간을 자세히 볼 수 있습니다.'):'실을 누르면 이름과 위치가 표시됩니다. 분홍 점선은 평면도의 동선, 파란 점선은 보행·시각 연계 표시입니다.');
+  showCard(d.title,d.sub,d.items,lv===0?(isMobile()?'아래 숫자 버튼으로 층을 고르면 그 높이로 건물을 잘라 보여줍니다. 위쪽 버튼으로 주요 공간과 등굣길을 자세히 볼 수 있습니다. 한 손가락으로 회전, 두 손가락으로 확대·이동합니다.':'왼쪽에서 층을 고르면 그 높이로 건물을 잘라 실 배치를 보여줍니다. 오른쪽 “자세히 보기”에서 주요 공간과 등굣길을 볼 수 있습니다.'):'실을 누르면 이름과 위치가 표시됩니다. 분홍 점선은 평면도의 동선, 파란 점선은 보행·시각 연계 표시입니다.');
   clearSel(); refresh();
 }
 function setFocus(k){
+  stopWalk();
   focus=k; const F=FOCUS[k]; fFloor=F.start||0; explode=false; current=-1;
   document.body.classList.add('focusing');
   document.querySelectorAll('.lv').forEach(b=>b.setAttribute('aria-pressed','false'));
   document.querySelectorAll('[data-f]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.f===k)));
   controls.minDistance=1.5;
-  showCard(F.title,F.sub,F.items,'파란 표시는 다른 공간과 이어지는 연결 지점입니다. 형태는 보고서 평면·단면·조감도에 그려진 요소만 반영했습니다.',k);
+  showCard(F.title,F.sub,F.items,F.route?'파랑·주황 선은 보고서 90·91쪽 평면도의 보행 화살표를 따라 그렸고, 점선은 입구 이후 복도로 이어지는 부분(평면에 화살표 없음)입니다.':'파란 표시는 다른 공간과 이어지는 연결 지점입니다. 형태는 보고서 평면·단면·조감도에 그려진 요소만 반영했습니다.',k);
   const vk=Object.keys(F.views);
   $('focusCtl').innerHTML=
-    `<div class="ctl"><h4>층별로 보기</h4><div class="chips" id="fFloors">${F.floors.map((f,i)=>`<button class="chip" data-i="${i}" aria-pressed="${i===fFloor}">${f.n}</button>`).join('')}</div></div>`+
-    `<div class="ctl"><h4>바라보는 위치</h4><div class="chips" id="fViews">${vk.map((v,i)=>`<button class="chip" data-v="${v}" aria-pressed="${i===0}">${v}</button>`).join('')}</div></div>`+
-    `<div class="row">${F.bld?'<label><input type="checkbox" id="fExplode"> 층을 띄워서 보기</label>':'<span></span>'}<span><button class="bigbtn" id="fBig">${big?'원래 크기로':'크게 보기'}</button> <button class="exit" id="fExit">전체 모형으로</button></span></div>`;
+    (F.route?'<div class="rlegend"><span><i style="background:#2F6FD0"></i>정문 길</span><span><i style="background:#E07A1F"></i>후문 길</span><span><i class="dash"></i>입구 이후 복도 연결</span></div>':'')+
+    `<div class="ctl"><h4>${F.floorTitle||'층별로 보기'}</h4><div class="chips" id="fFloors">${F.floors.map((f,i)=>`<button class="chip" data-i="${i}" aria-pressed="${i===fFloor}">${f.n}</button>`).join('')}</div></div>`+
+    `<div class="ctl"><h4>${F.viewTitle||'바라보는 위치'}</h4><div class="chips" id="fViews">${vk.map((v,i)=>`<button class="chip" data-v="${v}" aria-pressed="${i===0}">${v}</button>`).join('')}</div></div>`+
+    `<div class="row">${F.bld?'<label><input type="checkbox" id="fExplode"> 층을 띄워서 보기</label>':'<span></span>'}<span><button class="exit" id="fStop" hidden>걷기 멈추기</button> <button class="bigbtn" id="fBig">${big?'원래 크기로':'크게 보기'}</button> <button class="exit" id="fExit">전체 모형으로</button></span></div>`;
   $('fFloors').querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{ fFloor=+b.dataset.i; applyFocusFloor(); }));
-  $('fViews').querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{ $('fViews').querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',String(c===b))); flyTo(scaled(F.views[b.dataset.v])); }));
+  $('fViews').querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{ $('fViews').querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',String(c===b))); const v=F.views[b.dataset.v]; if(v.walk) startWalk(v.walk); else { stopWalk(); flyTo(scaled(v)); } }));
+  $('fStop').addEventListener('click',stopWalk);
   if(F.bld) $('fExplode').addEventListener('change',e=>{ explode=e.target.checked; if(explode) fFloor=0; applyExplode(); applyFocusFloor(); });
   $('fBig').addEventListener('click',()=>setBig(!big));
   $('fExit').addEventListener('click',()=>{ setLevel(0); goView('bird'); });
@@ -870,12 +949,16 @@ function inFocus(rec){ const F=FOCUS[focus]; rec.o.getWorldPosition(tmp); return
 function refresh(){
   const lvMode=current>0, fm=!!focus;
   const fl=fm?FOCUS[focus].floors[fFloor]:null, fLv=fl&&fl.el!=null?levelOf(fl.el):null;
+  const rf=(focus==='route'&&fl)?(fl.route||null):null;
+  routesG.visible=focus==='route';
+  setXray(focus==='route'&&!walk);
+  Object.entries(routeObj).forEach(([k,R])=>{ R.g.visible=!rf||rf===k; });
   labels.forEach(l=>{
     let show;
-    if(l.elTag) show=tFlow.checked&&((lvMode&&l.lv===current)||(fm&&(fLv!=null?l.lv===fLv:true)&&inFocus(l)));
+    if(l.elTag) show=tFlow.checked&&((lvMode&&l.lv===current)||(fm&&(fLv!=null?l.lv===fLv:(focus==='route'?l.lv<=2:true))&&inFocus(l)));
     else if(!tLabels.checked) show=false;
     else if(fm){
-      if(l.focus) show=l.focus===focus&&(explode||fLv==null||l.lv===fLv);
+      if(l.focus) show=l.focus===focus&&(explode||fLv==null||l.lv===fLv)&&(!l.route||!rf||l.route===rf);
       else if(l.room) show=(explode?l.plate.userData.bld===FOCUS[focus].bld:(fLv!=null&&l.lv===fLv))&&inFocus(l);
       else if(l.cls.includes('zone')) show=fLv===l.lv&&inFocus(l);
       else show=false;
@@ -908,7 +991,7 @@ document.querySelectorAll('[data-f]').forEach(b=>b.addEventListener('click',()=>
 function applyOffset(){
   const W=innerWidth,H=innerHeight, land=matchMedia('(max-height:520px)').matches;
   let ox=0,oy=0;
-  if(!big){
+  if(!big&&!walk){
     if(land) ox=-Math.round(W*0.2);                       // side panel on the left
     else if(isMobile()){ if(focus) oy=Math.round(H*0.17); } // bottom sheet
     else if(focus){ ox=-190; oy=60; }                       // desktop card on the lower left
@@ -935,7 +1018,7 @@ addEventListener('keydown',e=>{ if(e.key==='Escape'&&big) setBig(false); });
 { const v=scaled(views.bird); camera.position.copy(v.p); controls.target.copy(v.t); }
 
 const ray=new THREE.Raycaster(), mouse=new THREE.Vector2(); let down=null;
-renderer.domElement.addEventListener('pointerdown',e=>{down={x:e.clientX,y:e.clientY};});
+renderer.domElement.addEventListener('pointerdown',e=>{down={x:e.clientX,y:e.clientY}; stopWalk();});
 renderer.domElement.addEventListener('pointerup',e=>{
   if(!down||Math.hypot(e.clientX-down.x,e.clientY-down.y)>6) return;
   let cand;
@@ -1004,6 +1087,21 @@ addEventListener('resize',()=>{
   renderer.setSize(innerWidth,innerHeight); labelRenderer.setSize(innerWidth,innerHeight); fitDirty=true; invalidate();
 });
 
+function startWalk(key){
+  const R=routeObj[key]; if(!R) return;
+  const idx=FOCUS.route.floors.findIndex(f=>f.route===key); if(idx>=0&&focus==='route'){ fFloor=idx; applyFocusFloor(); }
+  camAnim=null;
+  if(reduced()){ const p=R.eye.getPointAt(0.55), q=R.eye.getPointAt(0.6); camera.position.copy(p); controls.target.set(q.x,p.y-0.35,q.z); invalidate(); return; }
+  controls.enabled=false; controls.enableDamping=false;
+  walk={curve:R.eye,start:performance.now(),dur:Math.max(9000,R.eye.getLength()/6*1000)};
+  setXray(false); routeWalkStyle(true); applyOffset();
+  const s=document.getElementById('fStop'); if(s) s.hidden=false;
+}
+function stopWalk(){
+  if(!walk) return; walk=null; controls.enabled=true; controls.enableDamping=true;
+  routeWalkStyle(false); setXray(focus==='route'); applyOffset();
+  const s=document.getElementById('fStop'); if(s) s.hidden=true; invalidate();
+}
 const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
 function loop(now){
   requestAnimationFrame(loop);
@@ -1020,11 +1118,26 @@ function loop(now){
   }));
   if(camAnim){ const k=Math.min(1,(now-camAnim.start)/camAnim.dur), e=ease(k);
     camera.position.lerpVectors(camAnim.from.p,camAnim.to.p,e); controls.target.lerpVectors(camAnim.from.t,camAnim.to.t,e); if(k>=1) camAnim=null; }
+  if(walk){
+    const k=Math.min(1,(now-walk.start)/walk.dur), e=ease(k);
+    const p=walk.curve.getPointAt(e), q=walk.curve.getPointAt(Math.min(1,e+0.02));
+    const dir=q.clone().sub(p); dir.y=0;
+    if(dir.length()<0.2) dir.copy(walk.lastDir||V(0,0,-1)); else { dir.normalize(); walk.lastDir=dir.clone(); }
+    camera.position.copy(p); controls.target.set(p.x+dir.x*7,p.y-0.55,p.z+dir.z*7);
+    if(k>=1) stopWalk();
+  }
+  let routeAnim=false;
+  if(routesG.visible){
+    const tt=now/1000;
+    Object.values(routeObj).forEach(R=>{ if(!R.g.visible) return;
+      R.dots.forEach((s,i)=>{ const u=((tt*5/R.len)+i/R.dots.length)%1; s.position.copy(R.path.getPointAt(u)); s.position.y+=0.1; }); });
+    routeAnim=true;
+  }
   const changed=controls.update();
   frame++;
   const camMoved=!lastCam.equals(camera.position)||!lastTgt.equals(controls.target);
   if((camMoved||moving||fitDirty)&&frame%3===0){ fitLabels(); fitDirty=false; lastCam.copy(camera.position); lastTgt.copy(controls.target); }
-  if(!(needsRender||changed||cutMoving||moving||camAnim)) return; // render only when something changes (saves battery on phones)
+  if(!(needsRender||changed||cutMoving||moving||camAnim||walk||routeAnim)) return; // render only when something changes (saves battery on phones)
   needsRender=false;
   renderer.render(scene,camera); labelRenderer.render(scene,camera);
 }
